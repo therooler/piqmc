@@ -1,13 +1,18 @@
 import argparse
+import os
 from models import EdwardsAnderson
 from python_interface import QuantumPIAnneal
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
 
-    ###################
-    # ADD KWARGS HERE #
-    ###################
+    if not os.path.exists('./results'):
+        os.mkdir('./results')
+    if not os.path.exists('./results/figures'):
+        os.mkdir('./results/figures')
+
+    # CHANGE THE DEFAULT ARGUMENTS HERE
+
+    parser = argparse.ArgumentParser()
 
     parser.add_argument('--P', default=100)
 
