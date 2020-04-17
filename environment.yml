@@ -1,0 +1,10 @@
+name: piqmc
+dependencies:
+  - python=3.7
+  - pip
+  - scipy
+  - cython
+  - pandas
+  pip:
+    - tqdm
+    - matplotlib
