@@ -18,7 +18,7 @@ to install the `piqmc` module.
 
 To test multiple experimental setups use the command line interface
 ```bash
-python run_experiment --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
+python run_experiment.py --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
 ```
 
 We can save the residual energies, the MC times tested and the experiement parameters in the `./results/` folder. Figures
