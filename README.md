@@ -77,4 +77,5 @@ Per default, these arrays are linearly spaced, beginning at **T_0** and ending w
 
 ### Miscaleneous
 
-**annealingrunseed**: Random seed to control the initialization and MCMC random number generator. Default is None.
+**annealingrunseed**: Random seed to control the initialization and MCMC random number generator.
+**seed**: Random seed to identify a random instance of couplings to be imported from the `data` folder.
