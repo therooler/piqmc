@@ -6,8 +6,8 @@ This code consists of 4 parts:
 
 * High performance SA and PIQMC QA Cython code. (`src/qmc.pyx` and `src/sa.pyx`)
 * A python interface to call this code (`python_interface.py`) that contains a `QuantumPIAnneal` class for PIQMC and `ClassicalAnneal` class for SA.
-* A file with different spin models. We supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble (`models.py`).
-* Scripts to run different experiments for either SA with (`run_SA_....py`) or PIQMC with (`run_PIQMC_....py`). Each run file corresponds to a different model.
+* A file with different spin models. Our implementation supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble (`models.py`).
+* Scripts to run different annealing experiments for either SA with (`run_SA_....py`) or for PIQMC with (`run_PIQMC_....py`). Here, each run file corresponds to a different model.
 
 In order to call the Cython code, we need to install the package. First, install the packages in `environment.yml` and then run
 
