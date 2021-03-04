@@ -1,4 +1,4 @@
-## Path Integral Quantm Monte Carlo
+## Path Integral Quantm Monte Carlo (PIQMC)
 
 This code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hadsed/pathintegral-qmc/)
 
@@ -6,9 +6,8 @@ This code consists of 4 parts:
 
 * High performance SA and PIQMC QA Cython code. (`src/qmc.pyx` and `src/sa.pyx`)
 * A python interface to call this code (`python_interface.py`)
-* A file with different spin models. We supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model (`models.py`).
-* Scripts to run different experiments:
-1. (`run_SA_EA.py`)
+* A file with different spin models. We supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble (`models.py`).
+* Scripts to run different experiments for either SA with (`run_SA_....py`) or PIQMC with (`run_PIQMC_....py`).
 
 In order to call the Cython code, we need to install the package. First, install the packages in `environment.yml` and then run
 
@@ -19,7 +18,7 @@ to install the `piqmc` module.
 
 To test multiple experimental setups use the command line interface
 ```bash
-python run_experiment.py --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
+python run_file.py --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
 ```
 
 We can save the residual energies, the MC times tested and the experiement parameters in the `./results/` folder. Figures
@@ -32,8 +31,8 @@ We will list the availabe arguments below. The default settings are according to
 
 **tau_schedule**: The spacing of the quantum annealing schedule. Default is [10, 100, 1000, 10000]
 
-**mcsteps**: The number of MC steps to perform at each point in the schedule. The total number of MC steps is then equal to tau * mcsteps. 
-Default value is 3.0.
+**mcsteps**: The number of MC sweeps to perform at each point in the schedule. The total number of MC steps is then equal to tau * mcsteps. 
+Default value is 1.0.
 
 **gamma_0**: The initial value of the transverse field gamma. Default value is 3.0.
 
