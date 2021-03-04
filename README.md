@@ -79,4 +79,4 @@ Per default, these arrays are linearly spaced, beginning at **T_0** and ending w
 
 **annealingrunseed**: Random seed to control the initialization and MCMC random number generator.
 
-**seed**: Random seed to identify a random instance of couplings to be imported from the `data` folder.
+**seed**: Random seed to identify the random instance of couplings to be imported from the `data` folder.
