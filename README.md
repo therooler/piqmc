@@ -46,7 +46,7 @@ calculated from the value of PT. Default is 1.0.
 Per default, these arrays are linearly spaced, beginning at **gamma_0** and ending with **gamma_T** in 
 **tau_schedule[i]** steps. One can in principle submit any list of schedules here, as long as they're arrays of length **tau_schedule[i]**
 
-#### Pre-Annealing Parameters
+#### `Pre-Annealing Parameters`
 
 In order to make sure the system is sufficiently thermalized, we perform short thermal annealing scheme from T_0 to T (T defined above).
 
