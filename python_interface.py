@@ -4,7 +4,7 @@ import piqmc.sa as sa
 import piqmc.qmc as qmc
 import copy
 
-########## Simulated Quantum Annealign Class ###########
+########## Simulated Quantum Annealing Class ###########
 
 class QuantumPIAnneal():
 
@@ -26,7 +26,7 @@ class QuantumPIAnneal():
         # QUANTUM ANNEALING #
         #####################
 
-        self.tau_schedule = kwargs.pop('tau_schedule', [1, int((10**0.5)*1), 10, int((10**0.5)*10), 100, int((10**0.5)*100), 1000, int((10**0.5)*1000), 10000, int((10**0.5)*10000), 100000])
+        self.tau_schedule = kwargs.pop('tau_schedule', [1, 10, 100, 1000,10000,100000])
         print("Annealing times to be run =", self.tau_schedule)
         self.mcsteps = kwargs.pop('mcsteps', 1)
         print("num_sweeps =", self.mcsteps)
@@ -138,7 +138,7 @@ class QuantumPIAnneal():
 
         return np.array(self.Energies) #2D np.array with size (len(self.q_scheds), numtrotterslices)
 
-########## Simulated Annealing Class ###########
+########## Simulated Classical Annealing Class ###########
 
 class ClassicalAnneal():
 
@@ -161,7 +161,7 @@ class ClassicalAnneal():
         ###########################
 
 
-        self.tau_schedule = kwargs.pop('tau_schedule', [1, int((10**0.5)*1), 10, int((10**0.5)*10), 100, int((10**0.5)*100), 1000, int((10**0.5)*1000), 10000, int((10**0.5)*10000), 100000])
+        self.tau_schedule = kwargs.pop('tau_schedule', [1, 10, 100, 1000, 10000, 100000])
         print("Annealing times to be run =", self.tau_schedule)
         self.mcsteps = kwargs.pop('mcsteps', 1)
         print("num_sweeps =", self.mcsteps)
