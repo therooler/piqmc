@@ -83,6 +83,6 @@ Per default, these arrays are linearly spaced, beginning at **T_0** and ending w
 
 ### Miscaleneous
 
-**annealingrunseed**: Random seed to control the initialization and MCMC random number generator.
+**numruns**: Number of SA/PIQMC annealing runs. Each run corresponds to a specific random seed to control the initialization and MCMC random number generator.
 
 **seed**: Random seed to identify the random instance of couplings to be imported from the `data` folder.
