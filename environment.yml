@@ -6,4 +6,3 @@ dependencies:
   - cython
   pip:
     - tqdm
-    - matplotlib
