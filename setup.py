@@ -20,7 +20,7 @@ extensions = [
 
 setup(
     name="piqmc",
-    description="Path-integral quantum Monte Carlo code for simulating quantum annealing.",
+    description="Path-integral quantum Monte Carlo and Simulated annealing codes for simulating quantum and classical annealing.",
     packages=find_packages(),
     cmdclass={'build_ext': build_ext},
     ext_modules=extensions,

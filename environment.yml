@@ -4,7 +4,6 @@ dependencies:
   - pip
   - scipy
   - cython
-  - pandas
   pip:
     - tqdm
     - matplotlib

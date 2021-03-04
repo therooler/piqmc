@@ -4,40 +4,40 @@ import piqmc.sa as sa
 import piqmc.qmc as qmc
 import copy
 
+########## Simulated Quantum Annealign Class ###########
 
 class QuantumPIAnneal():
 
-    def __init__(self, model, experiment_name, **kwargs):
+    def __init__(self, model, latticetype = "2D", annealingrunseed = 1 , **kwargs):
         """
-
         Args:
             model:
-            experiment_name:
             **kwargs:
         """
-
 
         #############
         # SET MODEL #
         #############
 
         self.model = model
-        self.experiment_name = experiment_name
+        self.latticetype = latticetype
 
         #####################
         # QUANTUM ANNEALING #
         #####################
 
-        self.tau_schedule = kwargs.pop('tau_schedule', [10, 100, 1000, 10000])
+        self.tau_schedule = kwargs.pop('tau_schedule', [1, int((10**0.5)*1), 10, int((10**0.5)*10), 100, int((10**0.5)*100), 1000, int((10**0.5)*1000), 10000, int((10**0.5)*10000), 100000])
+        print("Annealing times to be run =", self.tau_schedule)
         self.mcsteps = kwargs.pop('mcsteps', 1)
-        # tau = mcsteps * q_annealing_steps
-        self.gamma_0 = kwargs.pop('gamma_0', 3.0)
+        print("num_sweeps =", self.mcsteps)
+        self.gamma_0 = kwargs.pop('gamma_0', 1.0)
+        print("gamma_0 = ", self.gamma_0)
         self.gamma_T = kwargs.pop('gamma_T', 1e-8)
-        self.P = kwargs.pop('P', 40)
+        self.P = kwargs.pop('P', 20)
+        print("P = ", self.P)
         self.PT = kwargs.pop('PT', 1.0)
         self.q_temperature = self.PT / self.P
-        self.q_scheds = kwargs.pop('q_scheds',[np.linspace(self.gamma_0, self.gamma_T, self.mcsteps * t) for t in self.tau_schedule])
-        self.TAU_SCHED = False
+        self.q_scheds = kwargs.pop('q_scheds',[np.linspace(self.gamma_0, self.gamma_T, t) for t in self.tau_schedule])
         print("Temperature so that P * T = 1.0:", self.q_temperature)
 
         ###########################
@@ -55,8 +55,8 @@ class QuantumPIAnneal():
         # RANDOM NUMBERS #
         ##################
 
-        seed = kwargs.pop('seed', None)
-        self.rng = np.random.RandomState(seed)
+        self.annealingrunseed = annealingrunseed
+        self.rng = np.random.RandomState(self.annealingrunseed)
 
         ####################
         # INITIALIZE MODEL #
@@ -68,69 +68,169 @@ class QuantumPIAnneal():
     def pre_anneal(self):
         # START PRE-ANNEALING
         self.energy = []
-        print("\nEnergy per site before pre-annealing is: {}".format(
-            self.model.energy(self.spinVector) / self.model.nspins))
-        sa.Anneal(self.preannealing_sched,
-                  self.preannealing_mcsteps,
-                  self.spinVector,
-                  self.model.nbs,
-                  self.rng )
-        print("\nFinal energy per site after pre-annealing is: {}".format(
-            self.model.energy(self.spinVector) / self.model.nspins))
+        print("\nEnergy per spin before pre-annealing is: {}".format(
+            self.model.energy(self.spinVector)/self.model.nspins))
+        if self.latticetype == "2D":
+            sa.Anneal(self.preannealing_sched,
+                      self.preannealing_mcsteps,
+                      self.spinVector,
+                      self.model.nbs,
+                      self.rng )
+        elif self.latticetype == "FullyConnected":
+            sa.AnnealFullyConnected(self.preannealing_sched,
+                      self.preannealing_mcsteps,
+                      self.spinVector,
+                      self.model.J,
+                      self.rng )
+        else:
+            raise Exception("The supported lattice types are either 2D or FullyConnected")
+
+        print("Final energy per spin after pre-annealing is: {}".format(
+            self.model.energy(self.spinVector)/self.model.nspins), "\n")
+
 
     def quantum_anneal(self, confs, sched):
 
-        qmc.QuantumAnneal(sched,
-                          self.mcsteps,
-                          self.P,
-                          self.q_temperature,
-                          self.model.nspins,
-                          confs,
-                          self.model.nbs,
-                          self.rng )
+        if self.latticetype == "2D":
+            qmc.QuantumAnneal(sched,
+                              self.mcsteps,
+                              self.P,
+                              self.q_temperature,
+                              self.model.nspins,
+                              confs,
+                              self.model.nbs,
+                              self.rng )
+        elif self.latticetype == "FullyConnected":
+            qmc.QuantumAnnealFullyConnected(sched,
+                              self.mcsteps,
+                              self.P,
+                              self.q_temperature,
+                              self.model.nspins,
+                              confs,
+                              self.model.J,
+                              self.rng )
+        else:
+            raise Exception("The supported lattice types are either 2D or FullyConnected")
+
         # Get the lowest energy from all the slices
         self.minEnergy = np.inf
+        Energies = []
+
         for col in confs:
-            candidateEnergy = self.model.energy(col) / self.model.nspins
+            candidateEnergy = self.model.energy(col)
             if candidateEnergy < self.minEnergy:
                 self.minEnergy = candidateEnergy
-        print("\nFinal energy per site after quantum annealing is: {}".format(self.minEnergy))
+            Energies.append(candidateEnergy)
+
+        self.Energy = Energies # 1D np array size (numtrotterslices,)
+
+        print("Final minimal energy per spin after quantum annealing is: {}".format(self.minEnergy/self.model.nspins))
+        print("Final average energy per spin after quantum annealing is: {}".format(np.mean(self.Energy)/self.model.nspins),"\n")
 
     def perform_tau_schedule(self):
-        self.residual_energy = []
+        self.Energies = []
         self.pre_anneal()
         confs = np.tile(self.spinVector, (self.P, 1))
         for sch in self.q_scheds:
             sch_confs = copy.deepcopy(confs)
             self.quantum_anneal(sch_confs, sch)
-            self.residual_energy.append(abs(self.minEnergy - self.model.gsenergy))
-        self.TAU_SCHED = True
+            self.Energies.append(self.Energy)
 
-    def save_results(self):
-        assert self.TAU_SCHED, 'Run "perform_tau_schedule" first.'
-        params = {'tau_schedule': self.tau_schedule, 'mcsteps': self.mcsteps, 'gamma_0': self.gamma_0,
-                  'gamma_T': self.gamma_T, 'P': self.P, 'PT': self.PT, 'q_temperature': self.q_temperature,
-                  'q_scheds': self.q_scheds, 'preannealing_temperature': self.preannealing_temperature,
-                  'preannealing_schedule_steps': self.preannealing_schedule_steps,
-                  'preannealing_mcsteps': self.preannealing_mcsteps,
-                  'preannealing_schedchedule': self.preannealing_sched}
+        return np.array(self.Energies) #2D np.array with size (len(self.q_scheds), numtrotterslices)
 
-        np.save('./results/' + self.experiment_name + '_res_e', self.residual_energy)
-        np.save('./results/' + self.experiment_name + '_tau_sched', self.tau_schedule)
-        with open('./results/' + self.experiment_name + '_tau_sched.txt', 'w') as file:
-            for k, v in params.items():
-                file.write(str(k) + '=' + str(v) + '\n')
+########## Simulated Annealing Class ###########
 
-    def plot_results_tau_schedule(self):
-        fig1 = plt.figure(1)
-        ax1 = fig1.gca()
-        ax1.set_title("")
-        ax1.set_xscale("log")
-        ax1.set_yscale("log")
-        ax1.set_ylim([0.1*np.min(self.residual_energy), 1])
-        ax1.set_ylabel("Residual energy per site")
-        ax1.set_xlabel(r"$\tau$")
-        plt.plot(self.tau_schedule, self.residual_energy)
-        plt.savefig('./results/figures/' + self.experiment_name + '_res_e_tau_sched' + '.pdf')
+class ClassicalAnneal():
 
-        plt.show()
+    def __init__(self, model, latticetype = "2D", annealingrunseed = 1 , **kwargs):
+        """
+        Args:
+            model:
+            **kwargs:
+        """
+
+        #############
+        # SET MODEL #
+        #############
+
+        self.model = model
+        self.latticetype = latticetype
+
+        ###########################
+        # CLASSICAL ANNEALING #
+        ###########################
+
+
+        self.tau_schedule = kwargs.pop('tau_schedule', [1, int((10**0.5)*1), 10, int((10**0.5)*10), 100, int((10**0.5)*100), 1000, int((10**0.5)*1000), 10000, int((10**0.5)*10000), 100000])
+        print("Annealing times to be run =", self.tau_schedule)
+        self.mcsteps = kwargs.pop('mcsteps', 1)
+        print("num_sweeps =", self.mcsteps)
+
+        self.T0 = kwargs.pop('T_0', 1.0)
+        print("T0 =", self.T0)
+        self.Tf = kwargs.pop('T_f', 1e-8)
+        self.T_scheds = kwargs.pop('q_scheds',[np.linspace(self.T0, self.Tf, t) for t in self.tau_schedule]) #For SA (without QA)
+        self.num_warmup = kwargs.pop('num_warmup', 1000)
+        print("num warmup steps =", self.num_warmup)
+        ##################
+        # RANDOM NUMBERS #
+        ##################
+
+        self.annealingrunseed = annealingrunseed
+        self.rng = np.random.RandomState(self.annealingrunseed)
+
+        ####################
+        # INITIALIZE MODEL #
+        ####################
+
+        self.spinVector = 2.0 * self.rng.randint(2, size=self.model.nspins).astype(np.float) - 1.0
+        self.confs = None
+
+    def Anneal(self, sched):
+        print("Energy per spin before warmup is: {}".format(
+            self.model.energy(self.spinVector)/self.model.nspins))
+        #Perform Warmup step:
+        if self.latticetype == "2D":
+            sa.Anneal(np.array([float(self.T0)]),
+                      self.num_warmup,
+                      self.spinVector,
+                      self.model.nbs,
+                      self.rng )
+        elif self.latticetype == "FullyConnected":
+            sa.AnnealFullyConnected(np.array([float(self.T0)]),
+                      self.num_warmup,
+                      self.spinVector,
+                      self.model.J,
+                      self.rng )
+        else:
+            raise Exception("The supported lattice types are either 2D or FullyConnected")
+
+        print("Energy per spin after warmup is: {}".format(
+            self.model.energy(self.spinVector)/self.model.nspins))
+        #Perform Annealing
+        if self.latticetype == "2D":
+            sa.Anneal(sched,
+                      self.mcsteps,
+                      self.spinVector,
+                      self.model.nbs,
+                      self.rng )
+        elif self.latticetype == "FullyConnected":
+            sa.AnnealFullyConnected(sched,
+                      self.mcsteps,
+                      self.spinVector,
+                      self.model.J,
+                      self.rng )
+        else:
+            raise Exception("The supported lattice types are either 2D or FullyConnected")
+
+        print("Final energy per spin after annealing is: {}".format(
+            self.model.energy(self.spinVector)/self.model.nspins), "\n")
+        self.Energy = self.model.energy(self.spinVector)
+
+    def perform_tau_schedule(self):
+        self.Energies = []
+        for sch in self.T_scheds:
+            self.spinVector = 2.0 * self.rng.randint(2, size=self.model.nspins).astype(np.float) - 1.0
+            self.Anneal(sch)
+            self.Energies.append(self.Energy)
+        return np.array(self.Energies) #2D np.array with size (len(self.T_scheds))
