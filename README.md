@@ -26,18 +26,18 @@ We can save the residual energies, the MC times tested and the experiement param
 We will list the availabe arguments below. The default settings are according to 
 [Santoro (2002)](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.66.094203)
 
-### Quantum Annealing Parameters
+### `Quantum Annealing Parameters`
 
-**tau_schedule**: The spacing of the quantum annealing schedule. Default is [2**i for i in range(1,13+1)].
+**tau_schedule**: The spacing of the quantum annealing schedule. Default is [1, 10, 100, 1000,10000,100000].
 
 **mcsteps**: The number of MC sweeps to perform at each point in the schedule. The total number of MC steps is then equal to tau * mcsteps. 
 Default value is 1.0.
 
-**gamma_0**: The initial value of the transverse field gamma. Default value is 3.0.
+**gamma_0**: The initial value of the transverse field gamma. Default value is 1.0.
 
 **gamma_T**: The final value of the transverse field gamma. Default is 1e-8.
 
-**P**: The number of Trotter slices. Default is 40.
+**P**: The number of Trotter slices. Default is 20.
 
 **PT**: According to Santoro, the value of P*T is essential for the dynamics of the annealing. Here, T is the temperature, which is 
 calculated from the value of PT. Default is 1.0.
@@ -46,7 +46,7 @@ calculated from the value of PT. Default is 1.0.
 Per default, these arrays are linearly spaced, beginning at **gamma_0** and ending with **gamma_T** in 
 **tau_schedule[i]** steps. One can in principle submit any list of schedules here, as long as they're arrays of length **tau_schedule[i]**
 
-### Pre-Annealing Parameters
+#### Pre-Annealing Parameters
 
 In order to make sure the system is sufficiently thermalized, we perform short thermal annealing scheme from T_0 to T (T defined above).
 
@@ -58,6 +58,23 @@ In order to make sure the system is sufficiently thermalized, we perform short t
 
 **preannealing_sched**: Linearly spaced annealing schedule starting at **preannealing_temperature** and ending at **PT / P**
 
+### `Classical Annealing Parameters`
+
+**tau_schedule**: The spacing of the classical annealing schedule. Default is [1, 10, 100, 1000,10000,100000].
+
+**mcsteps**: The number of MC sweeps to perform at each point in the schedule. The total number of MC steps is then equal to tau * mcsteps. 
+Default value is 1.0.
+
+**T_0**: The initial value of temperature. Default value is 1.0.
+
+**T_f**: The final value of the temperature. Default is 1e-8.
+
+**num_warmup**: The number of warmup steps to thermalize SA at T_0.
+
+**T_scheds**: This is a list of numpy arrays corresponding to the annealing schedules.
+Per default, these arrays are linearly spaced, beginning at **T_0** and ending with **T_f** in 
+**tau_schedule[i]** steps. One can in principle submit any list of schedules here, as long as they are arrays of length **tau_schedule[i]**
+
 ### Miscaleneous
 
-**seed**: Random seed to control the initialization and MCMC random number generator. Default is None.
+**annealingrunseed**: Random seed to control the initialization and MCMC random number generator. Default is None.
