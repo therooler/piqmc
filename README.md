@@ -23,7 +23,7 @@ python run_file.py --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
 
 We can save the residual energies, the MC times tested and the experiement parameters in the `./results/` folder.
 
-We will list the availabe arguments below. The default settings are according to 
+We will list the availabe arguments below. The default settings are similar to 
 [Santoro (2002)](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.66.094203)
 
 ### `Quantum Annealing Parameters`
