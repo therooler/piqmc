@@ -4,11 +4,11 @@ This code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hads
 
 This code consists of 4 parts:
 
-1. High performance SA and PIQMC QA Cython code. (`src/qmc.pyx` and `src/sa.pyx`)
-2. A python interface to call this code (`python_interface.py`)
-3. A file with different spin models. We supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model (`models.py`).
-4. Scripts to run different experiments:
-4.1. (`run_SA_EA.py`)
+* High performance SA and PIQMC QA Cython code. (`src/qmc.pyx` and `src/sa.pyx`)
+* A python interface to call this code (`python_interface.py`)
+* A file with different spin models. We supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model (`models.py`).
+* Scripts to run different experiments:
+- (`run_SA_EA.py`)
 
 In order to call the Cython code, we need to install the package. First, install the packages in `environment.yml` and then run
 
