@@ -1,5 +1,5 @@
 # Simulated Annealing (SA) and Simulated Quantum Annealing (SQA) with Path Integral Monte Carlo
-This implementation contains an implementation of simulated annealing and path integral monte carlo, that was used to produce the results of this paper https://arxiv.org/abs/2101.10154. This repository contains an implementation for the 2D Edwards-Anderson model, Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
+This repository contains an implementation of simulated annealing and path integral monte carlo, that was used to produce the results of this paper https://arxiv.org/abs/2101.10154. In this code, we have an implementation that supports the 2D Edwards-Anderson model, the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
 
 This code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hadsed/pathintegral-qmc/).
 
