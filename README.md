@@ -1,8 +1,11 @@
-## Path Integral Quantm Monte Carlo (PIQMC)
+# Simulated Annealing (SA) and Simulated Quantum Annealing (SQA) with Path Integral Monte Carlo
+This implementation contains an implementation of simulated annealing and path integral monte carlo, that was used to produce the results of this paper https://arxiv.org/abs/2101.10154. This repository contains an implementation for the 2D Edwards-Anderson model, Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
 
 This code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hadsed/pathintegral-qmc/)
 
-This code consists of 4 parts:
+## Content
+
+This implementation consists of 4 parts:
 
 * High performance SA and PIQMC QA Cython code. (`src/qmc.pyx` and `src/sa.pyx`)
 * A python interface to call this code (`python_interface.py`) that contains a `QuantumPIAnneal` class for PIQMC and `ClassicalAnneal` class for SA.
