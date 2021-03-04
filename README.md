@@ -8,7 +8,7 @@ This code consists of 4 parts:
 * A python interface to call this code (`python_interface.py`)
 * A file with different spin models. We supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model (`models.py`).
 * Scripts to run different experiments:
-** (`run_SA_EA.py`)
+1. (`run_SA_EA.py`)
 
 In order to call the Cython code, we need to install the package. First, install the packages in `environment.yml` and then run
 
