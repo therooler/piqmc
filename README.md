@@ -5,7 +5,7 @@ This code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hads
 This code consists of 4 parts:
 
 * High performance SA and PIQMC QA Cython code. (`src/qmc.pyx` and `src/sa.pyx`)
-* A python interface to call this code (`python_interface.py`) that contains a `QuantumPIAnneal` class for PIQMC and `ClassiclAnneal` class for SA.
+* A python interface to call this code (`python_interface.py`) that contains a `QuantumPIAnneal` class for PIQMC and `ClassicalAnneal` class for SA.
 * A file with different spin models. We supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble (`models.py`).
 * Scripts to run different experiments for either SA with (`run_SA_....py`) or PIQMC with (`run_PIQMC_....py`). Each run file corresponds to a different model.
 
