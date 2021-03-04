@@ -1,17 +1,9 @@
 # Simulated Annealing (SA) and Simulated Quantum Annealing (SQA) with Path Integral Monte Carlo
 This implementation contains an implementation of simulated annealing and path integral monte carlo, that was used to produce the results of this paper https://arxiv.org/abs/2101.10154. This repository contains an implementation for the 2D Edwards-Anderson model, Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
 
-This code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hadsed/pathintegral-qmc/)
+This code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hadsed/pathintegral-qmc/).
 
-## Content
-
-This implementation consists of 4 parts:
-
-* High performance SA and PIQMC QA Cython code. (`src/qmc.pyx` and `src/sa.pyx`)
-* A python interface to call this code (`python_interface.py`) that contains a `QuantumPIAnneal` class for PIQMC and `ClassicalAnneal` class for SA.
-* A file with different spin models. Our implementation supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble (`models.py`).
-* Scripts to run different annealing experiments for either SA with (`run_SA_....py`) or for PIQMC with (`run_PIQMC_....py`). Here, each run file corresponds to a different model.
-
+## Installation
 In order to call the Cython code, we need to install the package. First, install the packages in `environment.yml` and then run
 
 ```bash
@@ -25,6 +17,15 @@ python run_file.py --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
 ```
 
 We can save the residual energies, the MC times tested and the experiement parameters in the `./results/` folder.
+
+## Content
+
+This implementation consists of 4 parts:
+
+* High performance SA and PIQMC QA Cython code. (`src/qmc.pyx` and `src/sa.pyx`)
+* A python interface to call this code (`python_interface.py`) that contains a `QuantumPIAnneal` class for PIQMC and `ClassicalAnneal` class for SA.
+* A file with different spin models. Our implementation supports the 2D Edwards-Anderson model, and fully-connected models such as the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble (`models.py`).
+* Scripts to run different annealing experiments for either SA with (`run_SA_....py`) or for PIQMC with (`run_PIQMC_....py`). Here, each run file corresponds to a different model.
 
 We will list the availabe arguments below. The default settings are similar to 
 [Santoro (2002)](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.66.094203).
