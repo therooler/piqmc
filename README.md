@@ -1,5 +1,5 @@
 # Simulated Classical and Quantum Annealing
-This repository contains an implementation of simulated annealing (SA) and simulated quantum annealing (SQA) with path integral monte carlo. This code was used to produce the results of this paper https://arxiv.org/abs/2101.10154.
+This repository contains an implementation of simulated annealing (SA) and simulated quantum annealing (SQA) with path integral monte carlo and it is based on Cython. This code was used to produce the results of this paper https://arxiv.org/abs/2101.10154.
 
 Here, we have an implementation that supports the 2D Edwards-Anderson model, the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
 
