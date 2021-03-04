@@ -1,7 +1,9 @@
-# Simulated Annealing (SA) and Simulated Quantum Annealing (SQA) with Path Integral Monte Carlo
-This repository contains an implementation of simulated annealing and path integral monte carlo, that was used to produce the results of this paper https://arxiv.org/abs/2101.10154. In this code, we have an implementation that supports the 2D Edwards-Anderson model, the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
+# Implementation of Simulated Annealing and Simulated Quantum Annealing
+This repository contains an implementation of simulated annealing (SA) and simulated quantum annealing (SQA) with path integral monte carlo. This code was used to produce the results of this paper https://arxiv.org/abs/2101.10154.
 
-This code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hadsed/pathintegral-qmc/).
+Here, we have an implementation that supports the 2D Edwards-Anderson model, the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
+
+We note that this code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hadsed/pathintegral-qmc/).
 
 ## Installation
 In order to call the Cython code, we need to install the package. First, install the packages in `environment.yml` and then run
