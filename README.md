@@ -21,15 +21,14 @@ To test multiple experimental setups use the command line interface
 python run_file.py --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
 ```
 
-We can save the residual energies, the MC times tested and the experiement parameters in the `./results/` folder. Figures
-are saved in `./results/figures/`
+We can save the residual energies, the MC times tested and the experiement parameters in the `./results/` folder.
 
 We will list the availabe arguments below. The default settings are according to 
 [Santoro (2002)](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.66.094203)
 
 ### Quantum Annealing Parameters
 
-**tau_schedule**: The spacing of the quantum annealing schedule. Default is [10, 100, 1000, 10000]
+**tau_schedule**: The spacing of the quantum annealing schedule. Default is [2**i for i in range(1,13+1)].
 
 **mcsteps**: The number of MC sweeps to perform at each point in the schedule. The total number of MC steps is then equal to tau * mcsteps. 
 Default value is 1.0.
