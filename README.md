@@ -3,7 +3,7 @@ This repository contains an implementation of simulated annealing (SA) and simul
 
 Here, we have an implementation that supports the 2D Edwards-Anderson model, the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
 
-We note that this code is an adaptation from [Hadayat Seddiqi's code](https://github.com/hadsed/pathintegral-qmc/).
+We note that this code is an adaptation from [Hadayat Seddiqi's Cython code](https://github.com/hadsed/pathintegral-qmc/). We fixed some bugs, added global moves to the quantum annealing monte carlo dynamics and stripped the code of things that were not needed for our purposes.
 
 ## Installation
 In order to call the Cython code, we need to install the package. First, install the packages in `environment.yml` and then run
