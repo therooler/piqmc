@@ -81,7 +81,7 @@ Default value is 1.0.
 Per default, these arrays are linearly spaced, beginning at **T_0** and ending with **T_f** in 
 **tau_schedule[i]** steps. One can in principle submit any list of schedules here, as long as they are arrays of length **tau_schedule[i]**
 
-### Miscellaneous
+### `Miscellaneous`
 
 **numruns**: Number of SA/PIQMC annealing runs. Each run corresponds to a specific random seed to control the initialization and MCMC random number generator.
 
