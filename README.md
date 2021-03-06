@@ -1,4 +1,7 @@
 # Simulated Classical and Quantum Annealing
+
+[![License](https://img.shields.io/badge/License-Do%20No%20Harm-blue)](https://github.com/therooler/piqmc/blob/master/LICENSE.md)
+
 This repository contains an implementation of simulated annealing (SA) and simulated quantum annealing (SQA) with path integral monte carlo (PIQMC). The interface to the code is written in Python 3 and the Monte Carlo sampling is written in Cython. This code was used to produce some of the results of this paper https://arxiv.org/abs/2101.10154.
 
 Here, we have an implementation that supports the 2D Edwards-Anderson model, the Sherrington-Kirkpatrick model and the Wishart Planted Ensemble.
