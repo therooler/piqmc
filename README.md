@@ -89,4 +89,4 @@ Per default, these arrays are linearly spaced, beginning at **T_0** and ending w
 
 ## License
 
-This code is licensed under the [Do No Harm](https://github.com/raisely/NoHarm) license and is intended for academic research that will be beneficial to humanity.
+This code is licensed under the [Do No Harm](https://github.com/therooler/piqmc/blob/master/LICENSE.md) license and is intended for academic research that will be beneficial to humanity.
