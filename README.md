@@ -93,3 +93,15 @@ Per default, these arrays are linearly spaced, beginning at **T_0** and ending w
 ## License
 
 This code is licensed under the [Do No Harm](https://github.com/therooler/piqmc/blob/master/LICENSE.md) license and is intended for academic research that will be beneficial to humanity.
+
+## Citing
+```bibtex
+@misc{VNA2021,
+      title={Variational Neural Annealing}, 
+      author={Mohamed Hibat-Allah and Estelle M. Inack and Roeland Wiersema and Roger G. Melko and Juan Carrasquilla},
+      year={2021},
+      eprint={2101.10154},
+      archivePrefix={arXiv},
+      primaryClass={cond-mat.dis-nn}
+}
+```
