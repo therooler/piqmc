@@ -14,7 +14,7 @@ In order to call the Cython code, we need to install the package. First, install
 ```bash
 python setup.py install
 ```
-to install the `piqmc` module.
+to install the `piqmc` module. The installation takes less than one minute with a typical CPU.
 
 To test multiple experimental setups use the command line interface
 ```bash
