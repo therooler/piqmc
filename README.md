@@ -92,9 +92,7 @@ Per default, these arrays are linearly spaced, beginning at **T_0** and ending w
 
 ## Speed illustration of our code
 
-Using an `Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz` CPU, the typical number of monte carlo steps for PIQMC with 20 trotter slices on the 2D Edwards-Anderson model with 40x40 spins is ~50 per second. For SA, ~2K monte carlo steps per second are performed on the same model.
-
-Similarly for the Sherrington-Kirkpatrick model with 100 spins, we have ~50 iterations per second for PIQMC with 100 trotter slices, while ~9000 iteractions per second for SA.
+Using an `Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz` CPU, the typical number of monte carlo steps for PIQMC with 20 trotter slices on the 2D Edwards-Anderson model with 40x40 spins is ~50 per second. For SA, ~2K monte carlo steps per second are performed on the same model. Similarly for the Sherrington-Kirkpatrick model with 100 spins, we have ~50 iterations per second for PIQMC with 100 trotter slices, while ~9000 iteractions per second for SA.
 
 ## License
 
