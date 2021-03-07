@@ -23,6 +23,10 @@ python run_<EXPERIMENT>.py --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
 See the respective files to see which arguments can be passed.
 We can save the residual energies, the MC times tested and the experiement parameters in the `./results/` folder.
 
+## Speed of our code
+
+Using an `Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz` CPU, the typical number of monte carlo steps for PIQMC with $20$ trotter slices on the 2D Edwards-Anderson model with $40 \times 40$ spins is $52$ per second. For SA, 2K monte carlo steps per second are performed on the same mode.
+
 ## Content
 
 This implementation consists of 4 parts:
