@@ -23,10 +23,6 @@ python run_<EXPERIMENT>.py --<ARG1>=<VALUE1> --<ARG2>=<VALUE2>  ...
 See the respective files to see which arguments can be passed.
 We can save the residual energies, the MC times tested and the experiement parameters in the `./results/` folder.
 
-## Speed of our code
-
-Using an `Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz` CPU, the typical number of monte carlo steps for PIQMC with $20$ trotter slices on the 2D Edwards-Anderson model with $40 \times 40$ spins is $52$ per second. For SA, 2K monte carlo steps per second are performed on the same mode.
-
 ## Content
 
 This implementation consists of 4 parts:
@@ -93,6 +89,12 @@ Per default, these arrays are linearly spaced, beginning at **T_0** and ending w
 **numruns**: Number of SA/PIQMC annealing runs. Each run corresponds to a specific random seed to control the initialization and MCMC random number generator.
 
 **seed**: Random seed to identify the random instance of couplings to be imported from the `data` folder.
+
+## Speed illustration of our code
+
+Using an `Intel(R) Xeon(R) CPU E5-2683 v4 @ 2.10GHz` CPU, the typical number of monte carlo steps for PIQMC with 20 trotter slices on the 2D Edwards-Anderson model with 40x40 spins is ~50 per second. For SA, ~2K monte carlo steps per second are performed on the same model.
+
+Similarly for the Sherrington-Kirkpatrick model with 100 spins, we have ~50 iterations per second for PIQMC with 100 trotter slices, while ~9000 iteractions per second for SA.
 
 ## License
 
