@@ -1,12 +1,13 @@
-import cython
-import numpy as np
+cimport cython
 cimport numpy as np
+
 from tqdm import tqdm
 from libc.math cimport exp as cexp
 from libc.math cimport tanh as ctanh
 from libc.math cimport log as clog
 from libc.stdlib cimport rand as crand
 from libc.stdlib cimport RAND_MAX as RAND_MAX
+
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -124,7 +125,6 @@ cpdef QuantumAnneal(np.float_t[:] sched,
                         confs[trotter_i, sidx] *= -1
                 ediff = 0.0
 
-#####################################################
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
