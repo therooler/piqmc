@@ -6,3 +6,4 @@ dependencies:
     - tqdm==4.45.0
     - scipy==1.4.1
     - cython==0.29.16
+    - matplotlib==3.2.1
